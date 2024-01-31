@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Fxxk Apk.1 安装器</string>
+    <string name="app_guide">由于在QQ和微信中发送apk文件时，文件名会被万恶的腾讯添加后缀.1，此App可以省去重命名步骤，直接安装apk。</string>
+    <string name="iumlab">IumLab</string>
+    <string name="about">关于</string>
+    <string name="guide_steps"><![CDATA[点击文件 → 用其他应用打开 → Apk.1 安装器 → 软件安装程序]]></string>
+    <string name="guide">指引</string>
+</resources>

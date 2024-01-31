@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name"> Fxxk Apk.1 Installer</string>
+    <string name="app_guide">Since when sending apk files in QQ and WeChat, the file name will be added by the evil Tencent with a .1 suffix, this App can help you skip the renaming step and directly install such apk files.</string>
+    <string name="iumlab">IumLab</string>
+    <string name="about">About</string>
+    <string name="guide_steps"><![CDATA[Click on file → Open With Another App → Apk.1 Installer → Package installer]]></string>
+    <string name="guide">Guide</string>
+</resources>
