@@ -54,7 +54,6 @@ android {
 
 }
 android.applicationVariants.all {
-    // 编译类型
     val buildType = this.buildType.name
     outputs.all {
         // 判断是否是输出 apk 类型
