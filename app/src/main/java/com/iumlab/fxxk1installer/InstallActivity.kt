@@ -1,22 +1,33 @@
 package com.iumlab.fxxk1installer
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import com.alibaba.fastjson.JSON
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.iumlab.fxxk1installer.ui.components.PermissionDialog
 import com.iumlab.fxxk1installer.ui.components.setSystemBar
 import com.iumlab.fxxk1installer.ui.theme.AppTheme
 import java.io.BufferedInputStream
@@ -39,6 +50,7 @@ class InstallActivity : ComponentActivity() {
         window.navigationBarColor = Color.Transparent.hashCode()
 
         super.onCreate(savedInstanceState)
+        checkPermissions()
         setContent {
             AppTheme {
                 setSystemBar()
@@ -48,12 +60,20 @@ class InstallActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Home()
+//                    val b = packageManager.canRequestPackageInstalls()
+//                    if (!b) {
+//                        PermissionDialog {
+//                            val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
+//                            startActivity(intent)
+//                        }
+//                    }
                 }
             }
         }
         if (intent != null) {
-            handleShared(intent)
-            Log.e(TAG, JSON.toJSONString(intent))
+//            checkPermissions()
+//            handleShared(intent)
+//            Log.e(TAG, JSON.toJSONString(intent))
         }
     }
 
@@ -158,15 +178,31 @@ class InstallActivity : ComponentActivity() {
 
     private fun checkPermissions() {
         val b = packageManager.canRequestPackageInstalls()
+        Log.e(TAG, "checkPermissions: $b")
+
         if (b) {
             handleShared(intent)
         } else {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.REQUEST_INSTALL_PACKAGES),
-                100
-            )
+
+            showDialog()
         }
+
+    }
+    private fun showDialog() {
+
+        val builder = MaterialAlertDialogBuilder(this)
+        builder.setTitle(R.string.get_permission)
+        builder.setMessage(R.string.desc_permission)
+        builder.setPositiveButton(R.string.ok) { dialog, which ->
+            dialog.dismiss()
+            val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
+            startActivity(intent)
+        }
+        builder.setNegativeButton(R.string.cancel) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        builder.show()
 
     }
 }

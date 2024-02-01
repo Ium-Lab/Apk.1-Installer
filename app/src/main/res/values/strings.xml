@@ -5,4 +5,8 @@
     <string name="about">About</string>
     <string name="guide_steps"><![CDATA[Click on file → Open With Another App → Apk.1 Installer → Package installer]]></string>
     <string name="guide">Guide</string>
+    <string name="get_permission">Get permission</string>
+    <string name="desc_permission">After clicking the OK button, the mobile phone will be redirected to the system settings. Please turn on the switch for Apk.1 Installer.</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
 </resources>

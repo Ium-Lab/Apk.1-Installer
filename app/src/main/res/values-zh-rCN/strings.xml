@@ -5,4 +5,8 @@
     <string name="about">关于</string>
     <string name="guide_steps"><![CDATA[点击文件 → 用其他应用打开 → Apk.1 安装器 → 软件安装程序]]></string>
     <string name="guide">指引</string>
+    <string name="get_permission">获取权限</string>
+    <string name="desc_permission">点击OK按钮后，手机将跳转到系统设置页面，请为Apk.1安装器打开开关。</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
 </resources>
