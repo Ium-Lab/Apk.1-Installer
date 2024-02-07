@@ -19,3 +19,97 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#Okio
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
+# OkHttp3
+-dontwarn okhttp3.logging.**
+-keep class okhttp3.internal.**{*;}
+-dontwarn okio.**
+-dontwarn com.alibaba.**
+-dontwarn io.liteglue.**
+-dontwarn net.vidageek.**
+-dontwarn org.apache.**
+-dontwarn org.chromium.**
+-dontwarn org.greenrobot.**
+-dontwarn com.thoughtworks.**
+-dontwarn com.google.**
+
+#UltimateBarX
+-keep class com.zackratos.ultimatebarx.ultimatebarx.** { *; }
+-keep public class * extends androidx.fragment.app.Fragment { *; }
+
+# Retrofit2
+-dontwarn javax.annotation.**
+-dontwarn javax.inject.**
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+
+# RxJava RxAndroid
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+    long producerIndex;
+    long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+
+# Gson
+-keep class com.google.gson.stream.** { *; }
+-keepattributes EnclosingMethod
+#定义的实体类
+-keep class com.goodpago.wallet.views.**{*;}
+-keep class com.goodpago.wallet.baser.**{*;}
+-keep class com.goodpago.wallet.entity.**{*;}
+-keep class com.goodpago.wallet.api.**{*;}
+-keep class com.goodpago.wallet.utils.**{*;}
+#-keep class com.goodpago.wallet.**{*;}
+
+#AndroidX
+-keep class com.google.android.material.** {*;}
+-keep class androidx.** {*;}
+-keep public class * extends androidx.**
+-keep interface androidx.** {*;}
+-dontwarn com.google.android.material.**
+-dontnote com.google.android.material.**
+-dontwarn androidx.**
+
+-keep class com.hcesdk.**{*;}
+-keep class com.upi.hcesdk.**{*;}
+-keep class java.util.**{*;}
+
+-keep class com.baidu.**{*;}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keep class **.R$* {*;}
+
+-keepclassmembers public class * extends android.view.View {
+   void set*(***);
+   *** get*();
+}
+
+-keepclassmembers public class * extends android.view.View {
+   void set*(***);
+   *** get*();
+}
+
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+

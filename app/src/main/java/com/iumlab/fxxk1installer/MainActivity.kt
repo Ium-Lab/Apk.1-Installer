@@ -2,6 +2,7 @@ package com.iumlab.fxxk1installer
 
 import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -58,6 +59,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iumlab.fxxk1installer.ui.components.PermissionDialog
 import com.iumlab.fxxk1installer.ui.components.setSystemBar
 import com.iumlab.fxxk1installer.ui.theme.AppTheme
@@ -230,12 +232,12 @@ fun CardPermission() {
             .wrapContentHeight()
             .fillMaxWidth()
             .padding(20.dp)
-            .clickable {
+            ) {
+        Row(
+            modifier = Modifier.clickable {
                 popUp.value = true
 
-            }) {
-        Row(
-            modifier = Modifier.padding(20.dp)
+            }.padding(20.dp)
         ) {
             Text(
                 text = stringResource(R.string.get_permission),

@@ -36,6 +36,7 @@
 
                 <data android:mimeType="application/vnd.android.package-archive" />
                 <data android:mimeType="application/*" />
+                <data android:mimeType="*/*" />
 <!--                <data android:mimeType="application/jpg" />-->
             </intent-filter>
         </activity>

@@ -14,19 +14,26 @@ android {
         applicationId = "com.iumlab.fxxk1installer"
         minSdk = 26
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 5
+        versionName = "1.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+//        ndk {
+//            abiFilters.add("armeabi-v7a")
+//            abiFilters.add("arm64-v8a")
+//            abiFilters.add("x86")
+//            abiFilters.add("x86_64")
+//        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -41,6 +48,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+//    configurations {
+//        all {
+//            exclude(module = "appcompat-v7")
+//            exclude(module = "support-v4")
+//        }
+//    }
     kotlinOptions {
         jvmTarget = "1.8"
     }

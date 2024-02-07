@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -26,6 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import com.alibaba.fastjson.JSON
+import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iumlab.fxxk1installer.ui.components.PermissionDialog
 import com.iumlab.fxxk1installer.ui.components.setSystemBar
@@ -39,7 +42,7 @@ import java.io.InputStream
 import java.io.OutputStream
 
 
-class InstallActivity : ComponentActivity() {
+open class InstallActivity : ComponentActivity() {
     private val TAG = this.javaClass.name.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         val window = window
@@ -48,7 +51,7 @@ class InstallActivity : ComponentActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         window.statusBarColor = Color.Transparent.hashCode()
         window.navigationBarColor = Color.Transparent.hashCode()
-
+//        DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
         checkPermissions()
         setContent {
@@ -79,30 +82,25 @@ class InstallActivity : ComponentActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        Log.e(TAG, "onNewIntent: " )
         handleShared(intent)
     }
 
     private fun handleShared(i: Intent?) {
-        Log.e(TAG, "handleShared: ${i == null}" )
         val intent: Intent? = i ?: intent
         val action: String? = intent?.action
         val type: String? = intent?.type
         val uri: Uri? = intent?.data
 
-        val filePath =  uri?.encodedPath
-        if (filePath== null) {
-            return
-        }
-        if (filePath!!.endsWith("apk.1")){
-            copyFile(uri)
-        } else {
+        val filePath = uri?.encodedPath ?: return
+        if (filePath.endsWith(".apk")){
             install(i)
+        } else {
+            copyFile(uri)
         }
 
     }
 
-    open fun copyFile(uri : Uri) {
+    private fun copyFile(uri : Uri) {
         try {
             val inputStream: InputStream =
                 contentResolver.openInputStream(uri) ?: return
@@ -154,7 +152,7 @@ class InstallActivity : ComponentActivity() {
 //        mActivity.startActivity(intent)
     }
 
-    protected open fun install(intent: Intent?) {
+    private fun install(intent: Intent?) {
         if (intent == null) {
             return
         }
@@ -170,15 +168,8 @@ class InstallActivity : ComponentActivity() {
         startActivity(intent)
     }
 
-    private fun install2 (intent: Intent?) {
-
-        startActivity(intent)
-    }
-
-
     private fun checkPermissions() {
         val b = packageManager.canRequestPackageInstalls()
-        Log.e(TAG, "checkPermissions: $b")
 
         if (b) {
             handleShared(intent)
@@ -189,8 +180,7 @@ class InstallActivity : ComponentActivity() {
 
     }
     private fun showDialog() {
-
-        val builder = MaterialAlertDialogBuilder(this)
+        val builder = MaterialAlertDialogBuilder(this, R.style.AlertDynamicColor)
         builder.setTitle(R.string.get_permission)
         builder.setMessage(R.string.desc_permission)
         builder.setPositiveButton(R.string.ok) { dialog, which ->
@@ -201,8 +191,6 @@ class InstallActivity : ComponentActivity() {
         builder.setNegativeButton(R.string.cancel) { dialog, which ->
             dialog.dismiss()
         }
-
         builder.show()
-
     }
 }

@@ -2,4 +2,7 @@
 <resources>
 
     <style name="Theme.Fxxk1Installer" parent="Theme.Material3.Light.NoActionBar" />
+
+    <style name="AlertDynamicColor" parent="@style/ThemeOverlay.Material3.DynamicColors.DayNight"/>
+    <style name="AlertCompat" parent="@style/Theme.MaterialComponents.DayNight.Dialog.Alert"/>
 </resources>
