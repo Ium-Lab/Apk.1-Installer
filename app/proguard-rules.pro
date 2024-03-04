@@ -54,24 +54,11 @@
     long producerIndex;
     long consumerIndex;
 }
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode consumerNode;
-}
 
 
 # Gson
 -keep class com.google.gson.stream.** { *; }
 -keepattributes EnclosingMethod
-#定义的实体类
--keep class com.goodpago.wallet.views.**{*;}
--keep class com.goodpago.wallet.baser.**{*;}
--keep class com.goodpago.wallet.entity.**{*;}
--keep class com.goodpago.wallet.api.**{*;}
--keep class com.goodpago.wallet.utils.**{*;}
-#-keep class com.goodpago.wallet.**{*;}
 
 #AndroidX
 -keep class com.google.android.material.** {*;}
@@ -81,12 +68,6 @@
 -dontwarn com.google.android.material.**
 -dontnote com.google.android.material.**
 -dontwarn androidx.**
-
--keep class com.hcesdk.**{*;}
--keep class com.upi.hcesdk.**{*;}
--keep class java.util.**{*;}
-
--keep class com.baidu.**{*;}
 
 -keepclasseswithmembers class * {
     public <init>(android.content.Context);

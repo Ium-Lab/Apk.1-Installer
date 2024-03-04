@@ -17,20 +17,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import com.alibaba.fastjson.JSON
-import com.google.android.material.color.DynamicColors
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.iumlab.fxxk1installer.ui.components.PermissionDialog
 import com.iumlab.fxxk1installer.ui.components.setSystemBar
 import com.iumlab.fxxk1installer.ui.theme.AppTheme
 import java.io.BufferedInputStream
@@ -41,7 +43,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 
-
+var showDialog by mutableStateOf(false)
 open class InstallActivity : ComponentActivity() {
     private val TAG = this.javaClass.name.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +72,7 @@ open class InstallActivity : ComponentActivity() {
 //                            startActivity(intent)
 //                        }
 //                    }
+                    PermissionDialog()
                 }
             }
         }
@@ -174,23 +177,48 @@ open class InstallActivity : ComponentActivity() {
         if (b) {
             handleShared(intent)
         } else {
-
-            showDialog()
+            showDialog = true
+//            showDialog()
         }
 
     }
-    private fun showDialog() {
-        val builder = MaterialAlertDialogBuilder(this, R.style.AlertDynamicColor)
-        builder.setTitle(R.string.get_permission)
-        builder.setMessage(R.string.desc_permission)
-        builder.setPositiveButton(R.string.ok) { dialog, which ->
-            dialog.dismiss()
-            val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
-            startActivity(intent)
+
+    @Composable
+    fun PermissionDialog() {
+        if (showDialog) {
+            AlertDialog(
+                onDismissRequest = {
+                    showDialog = false },
+                title = {
+                    Text(
+                        text = stringResource(R.string.get_permission),
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                },
+                text = {
+                    Text(
+                        text = stringResource(R.string.desc_permission),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                },
+                dismissButton = {
+                    TextButton(onClick = {
+                        showDialog = false
+                    }) {
+                        Text(text = stringResource(R.string.cancel))
+                    }
+                },
+                confirmButton = {
+                    TextButton(onClick = {
+                        showDialog = false
+                        val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
+                        startActivity(intent)
+                    }) {
+                        Text(text = stringResource(R.string.ok))
+                    }
+                }
+            )
         }
-        builder.setNegativeButton(R.string.cancel) { dialog, which ->
-            dialog.dismiss()
-        }
-        builder.show()
     }
 }
+

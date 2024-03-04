@@ -21,12 +21,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-//        ndk {
-//            abiFilters.add("armeabi-v7a")
-//            abiFilters.add("arm64-v8a")
-//            abiFilters.add("x86")
-//            abiFilters.add("x86_64")
-//        }
+        ndk {
+            abiFilters.add("armeabi-v7a")
+            abiFilters.add("arm64-v8a")
+            abiFilters.add("x86")
+            abiFilters.add("x86_64")
+        }
     }
 
     buildTypes {
@@ -48,12 +48,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-//    configurations {
-//        all {
-//            exclude(module = "appcompat-v7")
-//            exclude(module = "support-v4")
-//        }
-//    }
+    configurations {
+        all {
+            exclude(module = "appcompat-v7")
+            exclude(module = "support-v4")
+        }
+    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -74,7 +74,6 @@ android {
 android.applicationVariants.all {
     val buildType = this.buildType.name
     outputs.all {
-        // 判断是否是输出 apk 类型
         if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
             this.outputFileName = "${applicationId}_${versionName}_$buildType.apk"
         }
@@ -99,9 +98,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
     implementation("com.google.accompanist:accompanist-permissions:0.34.0")
-    implementation("com.alibaba:fastjson:1.2.76")
-    implementation("com.google.android.material:material:1.10.0")
+
 
 }

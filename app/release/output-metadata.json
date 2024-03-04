@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0",
-      "outputFile": "com.iumlab.fxxk1installer_1.0_release.apk"
+      "versionCode": 5,
+      "versionName": "1.4",
+      "outputFile": "com.iumlab.fxxk1installer_1.4_release.apk"
     }
   ],
   "elementType": "File"
