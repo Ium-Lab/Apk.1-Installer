@@ -36,10 +36,6 @@
 -dontwarn com.thoughtworks.**
 -dontwarn com.google.**
 
-#UltimateBarX
--keep class com.zackratos.ultimatebarx.ultimatebarx.** { *; }
--keep public class * extends androidx.fragment.app.Fragment { *; }
-
 # Retrofit2
 -dontwarn javax.annotation.**
 -dontwarn javax.inject.**
