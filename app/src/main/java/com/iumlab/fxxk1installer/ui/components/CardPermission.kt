@@ -1,4 +1,4 @@
-package com.iumlab.fxxk1installer.compose
+package com.iumlab.fxxk1installer.ui.components
 
 import android.content.Intent
 import android.provider.Settings

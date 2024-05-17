@@ -21,7 +21,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.iumlab.fxxk1installer.R
 
 @Composable
-fun setSystemBar(useDarkTheme: Boolean = isSystemInDarkTheme()){
+fun SetSystemBar(useDarkTheme: Boolean = isSystemInDarkTheme()){
     val systemUiController = rememberSystemUiController()
     if(useDarkTheme){
         systemUiController.setSystemBarsColor(

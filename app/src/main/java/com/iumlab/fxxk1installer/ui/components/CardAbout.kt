@@ -1,4 +1,4 @@
-package com.iumlab.fxxk1installer.compose
+package com.iumlab.fxxk1installer.ui.components
 
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
@@ -82,7 +82,7 @@ fun CardAbout() {
                     .padding(0.dp, 10.dp, 0.dp, 0.dp)
                     .clickable(
                         onClick = {
-                            uriHandler.openUri("https://github.com/Ium-Lab/Fxxk.1-Installer")
+                            uriHandler.openUri("https://github.com/Ium-Lab/Apk.1-Installer")
                         },
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(bounded = false),

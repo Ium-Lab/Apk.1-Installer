@@ -1,22 +1,14 @@
 package com.iumlab.fxxk1installer
 
-import android.Manifest
-import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -25,15 +17,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import com.iumlab.fxxk1installer.ui.components.setSystemBar
 import com.iumlab.fxxk1installer.ui.theme.AppTheme
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
@@ -55,10 +43,14 @@ open class InstallActivity : ComponentActivity() {
         window.navigationBarColor = Color.Transparent.hashCode()
 //        DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
-        checkPermissions()
+        val b = packageManager.canRequestPackageInstalls()
+        if (b) {
+            handleShared(intent)
+        } else {
+            showDialog = true
+        }
         setContent {
             AppTheme {
-                setSystemBar()
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -75,11 +67,6 @@ open class InstallActivity : ComponentActivity() {
                     PermissionDialog()
                 }
             }
-        }
-        if (intent != null) {
-//            checkPermissions()
-//            handleShared(intent)
-//            Log.e(TAG, JSON.toJSONString(intent))
         }
     }
 
@@ -117,14 +104,14 @@ open class InstallActivity : ComponentActivity() {
         }
     }
     private fun copyStream(input: InputStream, output: OutputStream, path: String) { //文件存储
-        val BUFFER_SIZE = 1024 * 2
-        val buffer = ByteArray(BUFFER_SIZE)
-        val in0 = BufferedInputStream(input, BUFFER_SIZE)
-        val out = BufferedOutputStream(output, BUFFER_SIZE)
+        val bufferSize = 1024 * 2
+        val buffer = ByteArray(bufferSize)
+        val in0 = BufferedInputStream(input, bufferSize)
+        val out = BufferedOutputStream(output, bufferSize)
         var count = 0
         var n = 0
         try {
-            while (in0.read(buffer, 0, BUFFER_SIZE).also { n = it } != -1) {
+            while (in0.read(buffer, 0, bufferSize).also { n = it } != -1) {
                 out.write(buffer, 0, n)
                 count += n
             }
@@ -169,18 +156,7 @@ open class InstallActivity : ComponentActivity() {
         )
         intent.setDataAndType(dataUri, "application/vnd.android.package-archive")
         startActivity(intent)
-    }
-
-    private fun checkPermissions() {
-        val b = packageManager.canRequestPackageInstalls()
-
-        if (b) {
-            handleShared(intent)
-        } else {
-            showDialog = true
-//            showDialog()
-        }
-
+        finish()
     }
 
     @Composable
