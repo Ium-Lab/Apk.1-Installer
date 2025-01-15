@@ -9,7 +9,7 @@
     <string name="desc_permission">After clicking the OK button, the mobile phone will be redirected to the system settings. Please turn on the switch for Apk.1 Installer.</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
-    <string name="the_app_icon_is_visible_now">The app icon is visible now.</string>
-    <string name="the_icon_is_hidden_now">The icon is hidden now.</string>
+    <string name="the_app_icon_is_visible_now">The app is visible in launcher now.</string>
+    <string name="the_icon_is_hidden_now">The app is hidden in launcher now.</string>
     <string name="it_may_not_take_effect_on_some_devices">It may not take effect on some devices.</string>
 </resources>

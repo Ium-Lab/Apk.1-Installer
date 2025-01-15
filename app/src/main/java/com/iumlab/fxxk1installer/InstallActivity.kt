@@ -2,6 +2,7 @@ package com.iumlab.fxxk1installer
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -43,7 +44,11 @@ open class InstallActivity : ComponentActivity() {
         window.navigationBarColor = Color.Transparent.hashCode()
 //        DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
-        val b = packageManager.canRequestPackageInstalls()
+        val b = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            packageManager.canRequestPackageInstalls()
+        } else {
+            true
+        }
         if (b) {
             handleShared(intent)
         } else {
@@ -70,9 +75,10 @@ open class InstallActivity : ComponentActivity() {
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         handleShared(intent)
+        sendBroadcast(Intent("CLOSE_MAIN_ACTIVITY"))
     }
 
     private fun handleShared(i: Intent?) {

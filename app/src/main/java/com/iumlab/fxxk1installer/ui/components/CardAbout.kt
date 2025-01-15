@@ -16,6 +16,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -74,7 +75,7 @@ fun CardAbout() {
                     clickMoment = System.currentTimeMillis();
                 },
                     interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple(bounded = false),)
+                    indication = ripple(),)
             )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -85,7 +86,7 @@ fun CardAbout() {
                             uriHandler.openUri("https://github.com/Ium-Lab/Apk.1-Installer")
                         },
                         interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(bounded = false),
+                        indication = ripple(bounded = false),
 
                         )
             ) {

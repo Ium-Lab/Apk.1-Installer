@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Fxxk1Installer" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/md_theme_dark_surface</item>
+    </style>
+
+    <!--    <style name="AlertDynamicColor" parent="@style/ThemeOverlay.Material3.DynamicColors.DayNight"/>-->
+    <!--    <style name="AlertCompat" parent="@style/Theme.MaterialComponents.DayNight.Dialog.Alert"/>-->
+</resources>

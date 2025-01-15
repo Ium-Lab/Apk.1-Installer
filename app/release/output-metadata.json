@@ -11,10 +11,27 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 5,
-      "versionName": "1.4",
-      "outputFile": "com.iumlab.fxxk1installer_1.4_release.apk"
+      "versionCode": 9,
+      "versionName": "1.8",
+      "outputFile": "com.iumlab.fxxk1installer_1.8_release.apk"
     }
   ],
-  "elementType": "File"
+  "elementType": "File",
+  "baselineProfiles": [
+    {
+      "minApi": 28,
+      "maxApi": 30,
+      "baselineProfiles": [
+        "baselineProfiles/1/com.iumlab.fxxk1installer_1.8_release.dm"
+      ]
+    },
+    {
+      "minApi": 31,
+      "maxApi": 2147483647,
+      "baselineProfiles": [
+        "baselineProfiles/0/com.iumlab.fxxk1installer_1.8_release.dm"
+      ]
+    }
+  ],
+  "minSdkVersionForDexing": 23
 }
